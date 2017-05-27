@@ -56,8 +56,22 @@ def choose_first():
     """
     Randomly chooses a player to start the game (coin toss).
     """
-
     if random.randint(0,1) == 0:
         return 'Player 1'
     else:
         return 'Player 2'
+
+def space_check(board, position):
+    """
+    Returns a boolean indicating whether a space on the board is freely available.
+    """
+    return board[positon] == ' '
+
+def full_board_check(board):
+    """
+    Checks if the board is full and returns a boolean value. True if full, false otherwise.
+    """
+    for i in range(1,10):
+        if space_check(board,i):
+            return False
+    return True
