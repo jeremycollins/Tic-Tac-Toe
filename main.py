@@ -65,7 +65,7 @@ def space_check(board, position):
     """
     Returns a boolean indicating whether a space on the board is freely available.
     """
-    return board[positon] == ' '
+    return board[position] == ' '
 
 def full_board_check(board):
     """
@@ -91,3 +91,54 @@ def replay():
     Ask the player if they want to play again. Returns a boolean True if they do want to play again.
     """
     return input('Do you want to play again? Enter Yes or No ').lower().startswith('y')
+
+
+
+
+print('Welcome to Tic Tac Toe!')
+
+while True:
+    theBoard = [' ']*10
+    player1_marker, player2_marker = player_input()
+    turn = choose_first()
+    print(turn + 'Will go first')
+
+    game_on = True
+
+    while game_on:
+        if turn == 'Player 1':
+            # Player 1's turn
+            display_board(theBoard)
+            position = player_choice(theBoard)
+            place_marker(theBoard,player1_marker,position)
+
+            if win_check(theBoard,player1_marker):
+                display_board(theBoard)
+                print('Congratulations, Player 1 has won the game!')
+                game_on = False
+            else:
+                if full_board_check(theBoard):
+                    display_board(theBoard)
+                    print('The game is a draw!')
+                    break
+                else:
+                    turn = 'Player 2'
+        else:
+            # Player 2's turn
+            display_board(theBoard)
+            position = player_choice(theBoard)
+            place_marker(theBoard,player2_marker,position)
+
+            if win_check(theBoard,player2_marker):
+                display_board(theBoard)
+                print('Congratulations, Player 2 has won the game!')
+                game_on = False
+            else:
+                if full_board_check(theBoard):
+                    display_board(theBoard)
+                    print('The game is a draw!')
+                    break
+                else:
+                    turn = 'Player 1'
+    if not replay():
+        break
